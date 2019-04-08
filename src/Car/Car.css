@@ -1,0 +1,15 @@
+.car-picture {
+    height: 130px;
+    float: right;
+    border-radius: 10px;
+}
+
+.car-descr{
+    width: 50%;
+    display: inline-block;
+    font-size: 18px;
+}
+
+.delete-btn{
+    background: #ff8989;
+}
