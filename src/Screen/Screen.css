@@ -1,33 +1,86 @@
 .Screen {
     margin: 5vh auto;
-    padding: 20px;
+    padding: 10px;
     height: 85vh;
     width: 500px;
-    background: #ffffff;
+    background: #e5efff;
     border-radius: 30px;
     border: 3px solid #51688c;
     overflow-y: scroll;
+    overflow-x: hidden;
+    position: relative;
+}
+
+.menu{
+    margin: -10px;
+    position: absolute;
+    height: 0;
+    width: 100%;
+    background: #e2fcff;
+    text-align: center;
+    font-size: 55px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    transition: all .3s ease-in;
+    z-index: 90;
+}
+
+.menu ul {
+    list-style: none;
+    padding: 0;
+}
+
+.menu ul li{
+    padding: 20px 0;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #8188d1;
+}
+
+.menu ul li a {
+    text-decoration: none;
+}
+
+.menu ul li a.active{
+    color: #babefc;
+}
+
+.menu ul li:hover{
+    background: #8188d1;
+}
+
+header {
+    padding-top: 20px;
 }
 
 .close-btn {
-    background: #acc2e5;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    line-height: 50px;
     font-size: 25px;
-    display: inline-block;
-    float: right;
+    right: 0;
     color: black;
-    border: 1px solid black;
+    position: absolute;
+    z-index: 80;
+    padding: 20px 30px;
+}
+
+.menu-btn{
+    padding: 20px 30px;;
+    font-size: 25px;
+    left: 0;
+    color: black;
+    position: absolute;
+    z-index: 100;
 }
 
 .close-btn:hover {
-    box-shadow: 0 0 10px rgba(0,0,0,0.8);
+    color: brown;
+}
+
+.menu-btn:hover {
+    color: cadetblue;
 }
 
 ::-webkit-scrollbar {
-    width: 10px;
+    width: 1px;
 }
 
 .input{}
@@ -43,5 +96,3 @@
 .input.red{
     border: 1px solid red;
 }
-
-

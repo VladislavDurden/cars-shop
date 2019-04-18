@@ -1,0 +1,9 @@
+.video{
+    border: 5px solid #9189ff;
+}
+
+.videoContainer{
+    background: #fff;
+    border-radius: 20px;
+    padding: 5px;
+}

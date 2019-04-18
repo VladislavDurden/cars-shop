@@ -1,15 +1,31 @@
+.Car {
+    border: 2px solid #51688c;
+    background: #ddebff;
+    display: inline-block;
+    margin: 10px auto;
+    padding: 5px;
+    text-align: left;
+    width: 95%;
+    transition: box-shadow .3s;
+
+}
+
+.Car:hover {
+    box-shadow: 0 0 30px rgba(96, 134, 196, 0.9);
+}
+
 .car-picture {
     height: 130px;
     float: right;
     border-radius: 10px;
 }
 
-.car-descr{
+.car-descr {
     width: 50%;
     display: inline-block;
     font-size: 18px;
 }
 
-.delete-btn{
+.delete-btn {
     background: #ff8989;
 }

@@ -1,0 +1,13 @@
+.loading{
+    border: 1px solid grey;
+    height: 20px;
+    width: 90%;
+    margin: 30px auto;
+}
+
+.loadingFill{
+    background: blue;
+    height: 100%;
+    width: 0%;
+    transition: width 3s ease-in-out;
+}

@@ -1,93 +1,23 @@
 import React, {Component} from 'react';
 import './Screen.css';
-import Car from '../Car/Car.js'
+import {Route, NavLink} from 'react-router-dom';
+import CarWrapper from '../CarWrapper/CarWrapper'
+import Counter from '../Counter/Counter';
+import Video from './Video/Video';
+
 
 class Screen extends Component {
     
-    state = {
-        cars: [
-            {
-                name:'Mercedes-Benz', 
-                year: 1996,
-                imageSrc: 'https://assets.catawiki.nl/assets/2017/11/15/2/3/1/231f493f-daf5-457e-ac29-f6f54bc7512d.jpg'
-            },
-            {
-                name:'BMW', 
-                year: 1982,
-                imageSrc: 'https://cdn.bringatrailer.com/wp-content/uploads/2017/01/Screen-Shot-2017-01-26-at-4.49.20-PM-940x712.png'
-            },
-            {
-                name:'Audi', 
-                year: 2001,
-                imageSrc: 'https://cdn.bringatrailer.com/wp-content/uploads/2017/08/59938fe6590bb_DSC_0304-940x548.jpg'
-            },
-            {
-                name:'Mercedes-Benz', 
-                year: 1996,
-                imageSrc: 'https://assets.catawiki.nl/assets/2017/11/15/2/3/1/231f493f-daf5-457e-ac29-f6f54bc7512d.jpg'
-            },
-            {
-                name:'BMW', 
-                year: 1982,
-                imageSrc: 'https://cdn.bringatrailer.com/wp-content/uploads/2017/01/Screen-Shot-2017-01-26-at-4.49.20-PM-940x712.png'
-            },
-            {
-                name:'Audi', 
-                year: 2001,
-                imageSrc: 'https://cdn.bringatrailer.com/wp-content/uploads/2017/08/59938fe6590bb_DSC_0304-940x548.jpg'
-            }
-        ],
-        pageTitle: 'Cars shop',
-        likedCar: 'car',
-        showCars: false,
-        close: null
-    }
-    
-//    нажатие на кнопку say thanks
-    sayThanks = () => {
+    constructor(props) {
+        super(props)
         
-        let pageTitle = this.state.pageTitle;
+        this.state = {
+
+            pageTitle: 'Cars shop',
+            showMenu: false,
+            close: null,
+        }
         
-        let thanks = 'Thanks, ' + pageTitle;
-        
-        this.setState({
-            pageTitle: thanks
-        })
-    }
-    
-//    нажатие на кнопку i like
-    chooseCar = (carName) => {
-        
-        this.setState({
-            likedCar: carName
-        })
-    }
-    
-//    берем данные из инпута
-    findNewCar = (e) => {
-        
-        let newCarName = e.target.value;
-        
-        this.setState({
-            likedCar: newCarName
-        })
-    }
-    
-    showCars = () => {
-        
-        this.setState({
-            showCars: !this.state.showCars
-        })
-        
-    }
-    
-    deleteCar = (index) => {
-        
-        const cars = this.state.cars.concat();
-        
-        cars.splice(index, 1);
-        
-        this.setState({cars});
     }
     
     closeApp = () => {
@@ -98,83 +28,128 @@ class Screen extends Component {
         
     }
     
+    toggleMenu = () => { 
+        this.setState({
+            showMenu: !this.state.showMenu
+        })
+    }
+    
+    //    жизненный цикл компонента
+    
+    
+//    следующие два метода вызываются когда компонент обновляется, но были заменены методом getDerivedStateFromProps
+    
+    componentWillReceiveProps(nextProps) {
+        
+    }
+
+    componentWillUpdate(nextProps, nextState) {
+        
+    }
+    
+//    этот метод сообщает реакту нужно ли рендерить по новой компонент после обновления
+    
+    shouldComponentUpdate(nextProps, nextState) {
+        return true
+    }
+    
+//    этот метод вызывается перед рендером и возвращает объект нового state или null если обновления не было
+    
+//    static getDerivedStateFromProps(nextProps, prevState) {
+//
+//    }
+    
+//    метод вызывается сразу после обновления, не вызывается после первого рендера
+    
+    componentDidUpdate() {
+        
+    }
+    
+//    метод вызывается перед последним рендером и нужен для того, чтобы запомнить какую-нибудь информацию перед рендером, например позицию скролла
+    
+//    getSnapshotBeforeUpdate() {
+//
+//    }
+    
+//    вызывается, когда компонент был удален
+    
+    componentWillUnmount() {
+
+    }
+    
     render() {
+
+        const shownMenuStyles = {
+            height: '100%'
+        };
         
-        const inputClasses = ['input'];
+        const hideMenuStyles = {
+            height: '0'
+        };
         
-        if(this.state.likedCar !== 'car') {
+        const close = this.state.close;
+        
+        const menuBtnClasses = [
+            'menu-btn',
+            'fa'
+        ]
+        
+        if(!this.state.showMenu) {
             
-            inputClasses.push('green');
+            menuBtnClasses.push('fa-bars')
             
         } else {
             
-            inputClasses.push('red');
+            menuBtnClasses.push('fa-times')
             
         }
         
-    
         
-//        способ задавать инлайновые стили через переменные
-
-        const headerStyles = {
-            fontWeight: 'bold',
-            fontFamily: 'italic',
-            color: '#51688c',
-            fontSize: '25px',
-            marginBottom: '30px'
-        }
-        
-        const close = this.state.close;
 
         return (
             <div className="Screen" style={close}>
-                <div className="close-btn" onMouseUp={this.closeApp}>X</div>
-
-                <header style={headerStyles}>{this.state.pageTitle}</header>
-                <h2>I wanna buy {this.state.likedCar}</h2>
-            
-                <button onClick={this.showCars}>GO TO THE SHOP</button>
+                <i className="close-btn fa fa-times" onClick={this.closeApp}/>
+                <i className={menuBtnClasses.join(' ')} onClick={this.toggleMenu}/>
                 
-                <div className='cars-wrapper' style={{
-                    background: '#e8e8e8',
-                    borderRadius: '15px',
-                    marginTop: '10px'
-                }}>
-                    
-                    { this.state.showCars 
-//            замена оператора if для JSX - ?
-                    ?
-            
-                    this.state.cars.map((car, index) => {
-
-                        return (
-                            <Car
-                                key = {index}
-                                name={car.name}
-                                year={car.year}
-                                imageSrc={car.imageSrc}
-                                onCarChose={() => this.chooseCar(car.name)}
-                                onCarDelete={() => this.deleteCar(index)}
-                            />
-                        )    
-
-                    })
-//                замена оператора else для JSX - :
-                    : null 
-                    
-                }
+                <div className='menu' style={this.state.showMenu ? shownMenuStyles : hideMenuStyles}>
+                    <ul>
+                        <li><NavLink 
+                                to="/" 
+                                exact 
+                                onClick={this.toggleMenu}
+                            >Home</NavLink></li>
+                            
+                        <li><NavLink 
+                                to="/shop" 
+                                exact 
+                                onClick={this.toggleMenu}
+                            >Shop</NavLink></li>
+                            
+                        <li><NavLink 
+                                to="/counter" 
+                                onClick={this.toggleMenu}
+                            >Counter</NavLink></li>
+                            
+                        <li><NavLink 
+                                to="/video" 
+                                onClick={this.toggleMenu}
+                            >Video</NavLink></li>
+                    </ul>
                 </div>
+
+                <Route path="/" exact render={() => <h1>Home page</h1>} />
                 
+                <Route path="/shop" exact render={() => 
+                    <CarWrapper 
+                        pageTitle={this.state.pageTitle}
+                        likedCar={this.state.likedCar} 
+                        cars = {this.state.cars}
+                    />} />
                 
-                <h2>If you don't find needed car, write here what you want</h2>
+                <Route path="/counter" exact component={Counter} />
                 
-                <input 
-                    type="text" 
-                    onChange={this.findNewCar}
-                    className={inputClasses.join(' ')}
-                />
-            
-                <button onClick={this.sayThanks}>Say thanks</button>
+                <Route path="/video" exact component={Video} />
+                
             </div> 
         )
         
